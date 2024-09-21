@@ -23,7 +23,7 @@
             color: #000; /* Black text */
             padding: 0;
             margin: 0;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Ensure no horizontal scrolling */
         }
 
         /* Top navigation bar */
@@ -33,10 +33,11 @@
             left: 0;
             width: 100%;
             background-color: #000; /* Black navigation bar */
-            padding: 20px;
+            padding: 10px 20px; /* Adjusted padding */
             display: flex;
             justify-content: space-between;
             z-index: 1000;
+            overflow-x: hidden;  /* Ensure no horizontal overflow */
         }
 
         /* Website Name */
@@ -112,11 +113,11 @@
 
         /* Media Queries for responsiveness */
         @media (max-width: 768px) {
-            /* Reduce navigation bar padding */
+            /* Adjust the navigation padding for tablets */
             nav {
                 flex-direction: column;
                 align-items: center;
-                padding: 10px;
+                padding: 10px; /* Reduced padding */
             }
 
             /* Reduce site title size */
@@ -154,7 +155,9 @@
         @media (max-width: 480px) {
             /* Further adjustments for very small screens */
             nav {
-                padding: 5px;
+                padding: 5px;  /* Minimized padding for very small screens */
+                flex-direction: column;
+                align-items: center;
             }
 
             .site-title {
@@ -185,7 +188,7 @@
         }
     </style>
 </head>
-<body>
+<body style="overflow-x: hidden;">
 
     <!-- Navigation -->
     <nav>
