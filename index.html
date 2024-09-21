@@ -38,6 +38,12 @@
             justify-content: space-between;
             z-index: 1000;
             overflow-x: hidden;  /* Ensure no horizontal overflow */
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2); /* Add subtle shadow for visibility */
+        }
+
+        /* Dynamic space under the fixed nav */
+        body {
+            padding-top: 70px; /* Leave space for nav, dynamically pushes content below it */
         }
 
         /* Website Name */
@@ -67,7 +73,7 @@
 
         /* Section styling */
         section {
-            padding: 150px 50px 50px; /* Top padding for space */
+            padding: 50px 50px 50px; /* Reduced top padding to prevent overflow */
             height: 100vh;
             display: none; /* Hide all sections by default */
             justify-content: center; /* Center content vertically */
