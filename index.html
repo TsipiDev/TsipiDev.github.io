@@ -81,6 +81,7 @@
         /* Title Styling */
         h1 {
             margin-bottom: 100px; /* Space below each section title */
+            font-size: 32px;
         }
 
         /* Content boxes are squares, centered in the body */
@@ -109,6 +110,79 @@
             color: #888; /* Gray text for the trademark */
         }
 
+        /* Media Queries for responsiveness */
+        @media (max-width: 768px) {
+            /* Reduce navigation bar padding */
+            nav {
+                flex-direction: column;
+                align-items: center;
+                padding: 10px;
+            }
+
+            /* Reduce site title size */
+            .site-title {
+                font-size: 20px;
+                margin-left: 0;
+            }
+
+            /* Adjust the nav links for smaller screens */
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+                margin-right: 0;
+            }
+
+            .nav-links a {
+                font-size: 16px;
+            }
+
+            /* Make the section title smaller */
+            h1 {
+                font-size: 28px;
+                margin-bottom: 50px;
+            }
+
+            /* Resize content boxes for smaller screens */
+            .content-box {
+                width: 250px; /* Smaller width */
+                height: 250px; /* Smaller height */
+                font-size: 20px;
+                margin-bottom: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Further adjustments for very small screens */
+            nav {
+                padding: 5px;
+            }
+
+            .site-title {
+                font-size: 18px;
+            }
+
+            .nav-links a {
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 24px;
+                margin-bottom: 40px;
+            }
+
+            /* Make the content boxes even smaller */
+            .content-box {
+                width: 200px;
+                height: 200px;
+                font-size: 18px;
+                margin-bottom: 40px;
+            }
+
+            /* Trademark adjustment */
+            .trademark {
+                font-size: 10px;
+            }
+        }
     </style>
 </head>
 <body>
