@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dimitris Vatousis</title>
-    <link rel="icon" href="icon.png" type="image/png">
+    <!-- FontAwesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <!-- Internal CSS for styling -->
     <style>
         * {
@@ -74,17 +76,30 @@
         .content-box {
             background-color: #f4f4f4;
             width: 300px; 
-            height: 300px;
             padding: 20px;
-            margin-bottom: 100px; 
             border: 1px solid #000;
             border-radius: 8px;
             color: #000; 
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        /* Links with icons */
+        .info-link {
+            display: flex;
             align-items: center;
-            text-align: center;
+            font-size: 18px;
+            text-decoration: none;
+            color: #000;
+        }
+        .info-link i {
+            margin-right: 10px;
             font-size: 24px;
+        }
+        .info-link:hover {
+            color: #0073b1; 
         }
         /* Trademark Styling */
         .trademark {
@@ -131,14 +146,30 @@
     <!-- Information Section -->
     <section id="information">
         <h1>Information</h1>
+
+        <!-- About Me Content Box -->
         <div class="content-box">
-            Coming Soon !!
+            <strong>About Me:</strong>
+            <p>Dimitris Vatousis is an undergraduate student in the Computer Science department at the Democritus University of Thrace in Greece (DUTH). His academic interests include software engineering, machine learning, robotics and network security. His main goal is to explore and learn as much as he can while contributing work that will help advance his field</p>
+        </div>
+
+        <!-- Social and Contact Links -->
+        <div class="content-box">
+            <a href="https://www.linkedin.com/in/dimitris-vatousis/" class="info-link" target="_blank">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://github.com/TsipiDev" class="info-link" target="_blank">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="mailto:dimitrisvatoussis@gmail.com" class="info-link">
+                <i class="fas fa-envelope"></i> dimitrisvatoussis@gmail.com
+            </a>
         </div>
     </section>
     <div class="trademark">© Dimitris Vatousis</div>
+
     <!-- JavaScript for smooth section transitions -->
     <script>
-       
         document.querySelectorAll('section').forEach(section => {
             section.classList.remove('active');
         });
