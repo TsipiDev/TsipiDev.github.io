@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dimitris Vatousis</title>
+    <link rel="icon" href="icon.png" type="image/png">
+    <!-- Internal CSS for styling -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #000;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        /* Top navigation bar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #000;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 1000;
+        }
+        /* Website Name */
+        .site-title {
+            font-size: 24px;
+            color: white;
+            margin-left: 30px;
+        }
+        /* Categories */
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            margin-right: 30px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #888;
+        }
+        /* Section styling */
+        section {
+            padding: 150px 50px 50px;
+            height: 100vh;
+            display: none;
+            justify-content: center; 
+            align-items: center;
+            flex-direction: column;
+        }
+        section.active {
+            display: flex;
+        }
+        /* Title Styling */
+        h1 {
+            margin-bottom: 100px; 
+        }
+        /* Content boxes */
+        .content-box {
+            background-color: #f4f4f4;
+            width: 300px; 
+            height: 300px;
+            padding: 20px;
+            margin-bottom: 100px; 
+            border: 1px solid #000;
+            border-radius: 8px;
+            color: #000; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 24px;
+        }
+        /* Trademark Styling */
+        .trademark {
+            position: fixed;
+            bottom: 10px;
+            right: 20px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="site-title">Dimitris Vatousis</div>
+        <div class="nav-links">
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#research">Research</a>
+            <a href="#information">Information</a>
+        </div>
+    </nav>
+    <!-- Experience Section -->
+    <section id="experience" class="active">
+        <h1>Experience</h1>
+        <div class="content-box">
+            Coming Soon !!
+        </div>
+    </section>
+    <!-- Projects Section -->
+    <section id="projects">
+        <h1>Projects</h1>
+        <div class="content-box">
+            Coming Soon !!
+        </div>
+    </section>
+    <!-- Research Section -->
+    <section id="research">
+        <h1>Research</h1>
+        <div class="content-box">
+            Coming Soon !!
+        </div>
+    </section>
+    <!-- Information Section -->
+    <section id="information">
+        <h1>Information</h1>
+        <div class="content-box">
+            Coming Soon !!
+        </div>
+    </section>
+    <div class="trademark">© Dimitris Vatousis</div>
+    <!-- JavaScript for smooth section transitions -->
+    <script>
+       
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.remove('active');
+        });
+        document.getElementById('experience').classList.add('active'); 
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                
+                document.querySelectorAll('section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
