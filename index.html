@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dimitris Vatousis</title>
-    <!-- FontAwesome CDN for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <!-- Internal CSS for styling -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,161 +14,91 @@
             box-sizing: border-box;
         }
         body {
-            font-family: Arial, sans-serif;
-            background-color: #fff;
-            color: #000;
-            padding: 0;
-            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
             overflow-x: hidden;
         }
-        /* Top navigation bar */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #000;
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
-            z-index: 1000;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
-        /* Website Name */
         .site-title {
             font-size: 24px;
-            color: white;
-            margin-left: 30px;
-        }
-        /* Categories */
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            margin-right: 30px;
+            font-weight: 600;
         }
         .nav-links a {
             text-decoration: none;
-            color: white;
+            color: #fff;
             font-size: 18px;
+            margin: 0 15px;
             transition: color 0.3s;
         }
         .nav-links a:hover {
-            color: #888;
+            color: #ff9f43;
         }
-        /* Section styling */
         section {
-            padding: 150px 50px 50px;
-            height: 100vh;
-            display: none;
-            justify-content: center; 
+            padding: 120px 50px 50px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
             align-items: center;
             flex-direction: column;
+            text-align: center;
         }
-        section.active {
-            display: flex;
-        }
-        /* Title Styling */
-        h1 {
-            margin-bottom: 100px; 
-        }
-        /* Content boxes */
         .content-box {
-            background-color: #f4f4f4;
-            width: 300px; 
-            padding: 20px;
-            border: 1px solid #000;
-            border-radius: 8px;
-            color: #000; 
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            font-size: 18px;
-            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+            width: 80%;
+            max-width: 600px;
         }
-        /* Links with icons */
+        .content-box:hover {
+            transform: translateY(-5px);
+        }
         .info-link {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             font-size: 18px;
             text-decoration: none;
-            color: #000;
+            color: #fff;
+            background: #ff9f43;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        .info-link:hover {
+            background: #ff7b00;
         }
         .info-link i {
             margin-right: 10px;
-            font-size: 24px;
         }
-        .info-link:hover {
-            color: #0073b1; 
-        }
-        /* Trademark Styling */
         .trademark {
-            position: fixed;
-            bottom: 10px;
-            right: 20px;
-            font-size: 12px;
-            color: #888;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #ccc;
         }
-
-        /* MEDIA QUERIES */
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 10px;
-            }
-            .site-title {
-                margin-left: 10px;
-                font-size: 20px;
-            }
-            .nav-links {
-                margin-right: 10px;
-                flex-direction: column;
-                gap: 15px;
-                margin-left: 10px;
-            }
-            .nav-links a {
-                font-size: 16px;
-            }
-            section {
-                padding: 100px 20px 20px;
-            }
-            h1 {
-                margin-bottom: 50px;
-                font-size: 24px;
-            }
-            .content-box {
-                width: 100%; 
-                font-size: 16px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .site-title {
-                font-size: 18px;
-            }
-            .nav-links {
-                gap: 10px;
-            }
-            .nav-links a {
-                font-size: 14px;
-            }
-            section {
-                padding: 80px 10px 10px;
-            }
-            h1 {
-                margin-bottom: 30px;
-                font-size: 22px;
-            }
-            .content-box {
-                font-size: 14px;
-            }
-            .info-link i {
-                font-size: 20px;
-            }
+        .project-images img {
+            width: 30%;
+            border-radius: 8px;
+            margin: 10px;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <div class="site-title">Dimitris Vatousis</div>
         <div class="nav-links">
@@ -180,78 +108,42 @@
             <a href="#information">Information</a>
         </div>
     </nav>
-    <!-- Experience Section -->
     <section id="experience" class="active">
         <h1>Experience</h1>
-        <div class="content-box">
-            Coming Soon !!
-        </div>
+        <div class="content-box">Coming Soon !!</div>
     </section>
-    <!-- Projects Section -->
     <section id="projects">
         <h1>Projects</h1>
-
-        <div class="content-box" style="width: 600px; text-align: center; padding: 20px;">
-            <strong>🤖Kaggle: Child Mind Institute - Problematic Internet Use Competition Model🤖</strong
-      <!-- Project Images -->
-        <div style="display: flex; justify-content: space-between; margin-top: 10px;">
-            <img src="https://camo.githubusercontent.com/82304972825c0c7489e9ae5dc68cc12dc4db170a15de57ef3bf73485658deb4a/68747470733a2f2f7777772e6b766b2e6c742f77702d636f6e74656e742f75706c6f6164732f323032322f30372f696d6167655f323032322d30372d32375f3135313732303639332e706e67" alt="Project Screenshot 1" style="width: 30%; border-radius: 8px;">
-            <img src="https://camo.githubusercontent.com/147a5551f088db2c73a207fc2ccfda560f6bb862210c5d507927c68100055164/687474703a2f2f6d6c762e63732e6968752e67722f77702d636f6e74656e742f75706c6f6164732f323032312f31322f4d4c565f6c6f676f2e706e67" alt="Project Screenshot 2" style="width: 40%; border-radius: 8px;">
-            <img src="https://fcon_1000.projects.nitrc.org/indi/cmi_eeg/_images/cmi_small.png" alt="Project Screenshot 3" style="width: 30%; border-radius: 8px;">
-        </div>
-            <p>🥉Description: Bronze Medal-Winning Code: 180th place solution out of 3560 Teams in the Child Mind Institute - Problematic Internet Use Competition🥉</p>
-            
-        <div style="display: flex; justify-content: center; margin-top: 10px;">
-            <a href="https://github.com/kw5t45/Child_mind_institute_MLV" class="info-link" target="_blank" 
-               style="display: inline-block; padding: 10px 20px; background-color: #000; color: #fff; border-radius: 5px; text-decoration: none;">
+        <div class="content-box">
+            <strong>🤖 Kaggle: Problematic Internet Use Model 🤖</strong>
+            <p>🥉 180th place out of 3560 teams 🥉</p>
+            <div class="project-images">
+                <img src="https://camo.githubusercontent.com/82304972825c0c7489e9ae5dc68cc12dc4db170a15de57ef3bf73485658deb4a/68747470733a2f2f7777772e6b766b2e6c742f77702d636f6e74656e742f75706c6f6164732f323032322f30372f696d6167655f323032322d30372d32375f3135313732303639332e706e67" alt="Project Screenshot 1">
+                <img src="https://camo.githubusercontent.com/147a5551f088db2c73a207fc2ccfda560f6bb862210c5d507927c68100055164/687474703a2f2f6d6c762e63732e6968752e67722f77702d636f6e74656e742f75706c6f6164732f323032312f31322f4d4c565f6c6f676f2e706e67" alt="Project Screenshot 2">
+                <img src="https://fcon_1000.projects.nitrc.org/indi/cmi_eeg/_images/cmi_small.png" alt="Project Screenshot 3">
+            </div>
+            <a href="https://github.com/kw5t45/Child_mind_institute_MLV" class="info-link" target="_blank">
                 <i class="fab fa-github"></i> View on GitHub
             </a>
         </div>
-    </div>
     </section>
-    <!-- Research Section -->
     <section id="research">
         <h1>Research</h1>
-        <div class="content-box">
-            Coming Soon !!
-        </div>
+        <div class="content-box">Coming Soon !!</div>
     </section>
-    <!-- Information Section -->
     <section id="information">
         <h1>Information</h1>
         <div class="content-box">
             <strong>About Me:</strong>
-            <p>Dimitris Vatousis is an undergraduate student in the Computer Science department at the Democritus University of Thrace in Greece (DUTH). His academic interests include software engineering, machine learning, robotics, and network security.</p>
-        </div>
-
-        <div class="content-box">
+            <p>Dimitris Vatousis, Computer Science student at Democritus University of Thrace.</p>
             <a href="https://www.linkedin.com/in/dimitris-vatousis/" class="info-link" target="_blank">
                 <i class="fab fa-linkedin"></i> LinkedIn
             </a>
-            <a href="https://github.com/TsipiDev" class="info-link" target="_blank">
-                <i class="fab fa-github"></i> GitHub
-            </a>
             <a href="mailto:dimitrisvatoussis@gmail.com" class="info-link">
-                <i class="fas fa-envelope"></i> dimitrisvatoussis@gmail.com
+                <i class="fas fa-envelope"></i> Email Me
             </a>
         </div>
     </section>
     <div class="trademark">© Dimitris Vatousis</div>
-
-    <!-- JavaScript for section transitions -->
-    <script>
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                
-                document.querySelectorAll('section').forEach(section => {
-                    section.classList.remove('active');
-                });
-                
-                document.getElementById(targetId).classList.add('active');
-            });
-        });
-    </script>
 </body>
 </html>
