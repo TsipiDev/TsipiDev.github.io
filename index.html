@@ -112,7 +112,6 @@
 
         /* MEDIA QUERIES */
         @media (max-width: 768px) {
-        
             nav {
                 flex-direction: column;
                 align-items: flex-start;
@@ -131,7 +130,6 @@
             .nav-links a {
                 font-size: 16px;
             }
-            
             section {
                 padding: 100px 20px 20px;
             }
@@ -146,7 +144,6 @@
         }
 
         @media (max-width: 480px) {
-            
             .site-title {
                 font-size: 18px;
             }
@@ -191,19 +188,19 @@
         </div>
     </section>
     <!-- Projects Section -->
-<section id="projects">
-    <h1>Projects</h1>
+    <section id="projects">
+        <h1>Projects</h1>
 
-    <div class="content-box">
-        <strong>🤖Kaggle: Child Mind Institute - Problematic Internet Use Competition Model (MLV Research Team)🤖</strong>
-        <p>Description: Bronze Medal-Winning Code: 180th place solution out of 3560 Teams in the Child Mind Institute - Problematic Internet Use Competition.</p>
-        
-        <a href="https://github.com/kw5t45/Child_mind_institute_MLV" class="info-link" target="_blank">
-            <i class="fab fa-github"></i> View on GitHub
-        </a>
-    </div>
-</section>
- <!-- Research Section -->
+        <div class="content-box">
+            <strong>🤖Kaggle: Child Mind Institute - Problematic Internet Use Competition Model🤖</strong>
+            <p>🥉Description: Bronze Medal-Winning Code: 180th place solution out of 3560 Teams in the Child Mind Institute - Problematic Internet Use Competition🥉</p>
+            
+            <a href="https://github.com/kw5t45/Child_mind_institute_MLV" class="info-link" target="_blank">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
+        </div>
+    </section>
+    <!-- Research Section -->
     <section id="research">
         <h1>Research</h1>
         <div class="content-box">
@@ -213,14 +210,11 @@
     <!-- Information Section -->
     <section id="information">
         <h1>Information</h1>
-
-        <!-- About Me Content Box -->
         <div class="content-box">
             <strong>About Me:</strong>
-            <p>Dimitris Vatousis is an undergraduate student in the Computer Science department at the Democritus University of Thrace in Greece (DUTH). His academic interests include software engineering, machine learning, robotics and network security. His main goal is to explore and learn as much as he can while contributing work that will help advance his field</p>
+            <p>Dimitris Vatousis is an undergraduate student in the Computer Science department at the Democritus University of Thrace in Greece (DUTH). His academic interests include software engineering, machine learning, robotics, and network security.</p>
         </div>
 
-        <!-- Social and Contact Links -->
         <div class="content-box">
             <a href="https://www.linkedin.com/in/dimitris-vatousis/" class="info-link" target="_blank">
                 <i class="fab fa-linkedin"></i> LinkedIn
@@ -235,12 +229,8 @@
     </section>
     <div class="trademark">© Dimitris Vatousis</div>
 
-    <!-- JavaScript for smooth section transitions -->
+    <!-- JavaScript for section transitions -->
     <script>
-        document.querySelectorAll('section').forEach(section => {
-            section.classList.remove('active');
-        });
-        document.getElementById('experience').classList.add('active'); 
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
