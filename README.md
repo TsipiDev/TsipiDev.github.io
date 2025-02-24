@@ -10,5 +10,3 @@ Welcome to my personal website! This project serves as my online portfolio, show
 🔗 GitHub: [TsipiDev](https://github.com/TsipiDev)
 
 ---
-
-### ⭐ If you like this project, consider giving it a star on GitHub! ⭐
