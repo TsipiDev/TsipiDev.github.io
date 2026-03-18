@@ -87,6 +87,7 @@
             padding: 10px 20px;
             border-radius: 8px;
             transition: background 0.3s;
+            margin: 5px;
         }
         .info-link:hover {
             background: #ff7b00;
@@ -104,6 +105,18 @@
             width: 30%;
             border-radius: 8px;
             margin: 10px;
+        }
+        .badge-row {
+            margin: 10px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+        }
+        .badge-row img {
+            width: auto;
+            height: 22px;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -128,12 +141,12 @@
 
         <!-- Project 1 -->
         <div class="content-box">
-            <strong>🤖 Kaggle: Child Mind Institute - Problematic Internet Use Competition Model 🤖</strong>
-            <p>🥉 Bronze Medal-Winning Code: 180th place solution out of 3560 Teams 🥉</p>
+            <strong>Kaggle: Child Mind Institute - Problematic Internet Use Competition Model</strong>
+            <p>Bronze Medal-Winning Code: 180th place solution out of 3560 Teams</p>
             <div class="project-images">
-                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.kaggle.com%2Fstatic%2Fimages%2Flogos%2Fkaggle-logo-transparent-300.png&f=1&nofb=1&ipt=c478cf4ea220e576d94763d87a278259153f84ab83d758ab7cf5ce0a6322501c" alt="Project Screenshot 1">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.kaggle.com%2Fstatic%2Fimages%2Flogos%2Fkaggle-logo-transparent-300.png&f=1&nofb=1&ipt=c478cf4ea220e576d94763d87a278259153f84ab83d758ab7cf5ce0a6322501c" alt="Kaggle">
                 <img src="https://lh3.googleusercontent.com/proxy/Iey_H-EK4UL_Bcvwyabn_ijbIevLGt5dbeIrTNTl8LU9Y4Jfgn62rG0_veFMGztVl1bpXgMTVrLenGQp2yiKQuQFK8UG48oY9lsre8BK73M" alt="Project Screenshot 2">
-                <img src="https://fcon_1000.projects.nitrc.org/indi/cmi_eeg/_images/cmi_small.png" alt="Project Screenshot 3">
+                <img src="https://fcon_1000.projects.nitrc.org/indi/cmi_eeg/_images/cmi_small.png" alt="CMI">
             </div>
             <div style="margin-top: 10px;">
                 <a href="https://github.com/kw5t45/Child_mind_institute_MLV" class="info-link" target="_blank">
@@ -142,15 +155,14 @@
             </div>
         </div>
 
-        <!-- Project 2: New Line Follower Robot -->
+        <!-- Project 2 -->
         <div class="content-box">
-            <strong>🛴 Line Follower Robot – University Competition Entry 🛴</strong>
+            <strong>Line Follower Robot - University Competition Entry</strong>
             <p>Designed, built, and programmed a robust line-following robot using Arduino and infrared sensors for university-level robotics competition.</p>
-            <div class="project-images">
-                <div class="project-images" style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                    <img src="https://github.com/TsipiDev/Line_Follower_Robot_University_Competition/raw/main/Final%20Robot%20Build.jpeg?raw=true" alt="Robot" style="width: 45%; height: 150px; object-fit: cover; border-radius: 8px;">
-                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fassets.onthehub.com%2Fattachments%2F15%2F04fcc2c1-7da7-ed11-8153-000d3af41938%2Ffff7ec47-ac54-460d-abe8-118808d0cee3.png&f=1&nofb=1&ipt=c00ea71fc0b36346fad1ed188cf5960559a74655a68f5acd5174308f2b355453" alt="DUTH" style="width: 45%; height: 150px; object-fit: contain; border-radius: 8px;">
-                </div>
+            <div class="project-images" style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+                <img src="https://github.com/TsipiDev/Line_Follower_Robot_University_Competition/raw/main/Final%20Robot%20Build.jpeg?raw=true" alt="Robot" style="width: 45%; height: 150px; object-fit: cover; border-radius: 8px;">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fassets.onthehub.com%2Fattachments%2F15%2F04fcc2c1-7da7-ed11-8153-000d3af41938%2Ffff7ec47-ac54-460d-abe8-118808d0cee3.png&f=1&nofb=1&ipt=c00ea71fc0b36346fad1ed188cf5960559a74655a68f5acd5174308f2b355453" alt="DUTH" style="width: 45%; height: 150px; object-fit: contain; border-radius: 8px;">
+            </div>
             <div style="margin-top: 10px;">
                 <a href="https://github.com/TsipiDev/Line_Follower_Robot_University_Competition" class="info-link" target="_blank">
                     <i class="fab fa-github"></i> View on GitHub
@@ -158,13 +170,13 @@
             </div>
         </div>
 
-        <!-- Project 3: ARM NN GitHub Guide -->
+        <!-- Project 3 -->
         <div class="content-box">
-            <strong>🧠 ARM NN & PyArmNN Installation Guide with TensorFlow Lite Support 🧠</strong>
+            <strong>ARM NN & PyArmNN Installation Guide with TensorFlow Lite Support</strong>
             <p>A complete up to date guide (As of July 2025) I wrote to building ARM NN with TensorFlow Lite and PyArmNN support on a Raspberry Pi, including step-by-step installation, dependency setup, and inference with a real TFLite model.</p>
-            <div class="project-images">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/cb/Raspberry_Pi_Logo.svg/120px-Raspberry_Pi_Logo.svg.png" alt="Pi Logo" style="width: 100px; height: 100px; object-fit: contain;">
-                <img src="https://arm-software.github.io/armnn/24.02/Arm_NN_horizontal_blue.png" alt="ARM NN Logo">
+            <div class="project-images" style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/cb/Raspberry_Pi_Logo.svg/120px-Raspberry_Pi_Logo.svg.png" alt="Pi Logo" style="width: 45%; height: 100px; object-fit: contain; border-radius: 8px;">
+                <img src="https://arm-software.github.io/armnn/24.02/Arm_NN_horizontal_blue.png" alt="ARM NN Logo" style="width: 45%; height: 100px; object-fit: contain; border-radius: 8px;">
             </div>
             <div style="margin-top: 10px;">
                 <a href="https://github.com/TsipiDev/PyArmNN_Installation_Guide_with_TensorFlow_Lite_Support" class="info-link" target="_blank">
@@ -173,9 +185,9 @@
             </div>
         </div>
 
-         <!-- Project 4 -->
+        <!-- Project 4 -->
         <div class="content-box">
-            <strong>🛰️ SatCore — Satellite Mission Control & Telemetry Analysis Platform 🛰️</strong>
+            <strong>SatCore — Satellite Mission Control & Telemetry Analysis Platform</strong>
             <p style="margin: 10px 0;">Open-source ground segment toolkit for satellite operations. Features real-time spacecraft health monitoring, telemetry analysis with threshold forecasting, ground station pass scheduling using real TLE orbital data from 14,000+ satellites, and live 3D orbital visualization.</p>
             <div class="badge-row">
                 <img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
@@ -189,6 +201,7 @@
                 </a>
             </div>
         </div>
+
     </section>
 
     <section id="research">
@@ -200,8 +213,8 @@
         <h1>Information</h1>
         <div class="content-box">
             <strong>About Me:</strong>
-            <p>🎓 Dimitris Vatousis is an undergraduate student in the Computer Science department at the Democritus University of Thrace in Greece (DUTH).🎓<br>
-                His academic interests include 👨🏻‍💻 software engineering, 💡 machine learning, 🤖 robotics, 📟 embedded systems and 🌐 network security.</p>
+            <p>Dimitris Vatousis is an undergraduate student in the Computer Science department at the Democritus University of Thrace in Greece (DUTH).<br><br>
+                His academic interests include software engineering, machine learning, robotics, embedded systems and network security.</p>
             <br>
             <img src="https://github.com/TsipiDev/TsipiDev.github.io/blob/main/profile_pic.jpg?raw=true" alt="Dimitris Vatousis" style="width: 150px; height: 150px; border-radius: 50%; margin-bottom: 15px;">
             <br>
@@ -217,6 +230,3 @@
     <div class="trademark">© Dimitris Vatousis</div>
 </body>
 </html>
-
-
-
