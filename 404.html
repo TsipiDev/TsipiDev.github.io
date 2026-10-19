@@ -53,12 +53,6 @@
         ::selection { background: var(--yellow); color: var(--ink); }
         :focus-visible { outline: 2px dashed var(--blue); outline-offset: 4px; }
 
-        .rails { position: fixed; top: 0; bottom: 0; width: 22px; pointer-events: none; display: flex; gap: 8px; justify-content: center; }
-        .rails.left { left: 6px; }
-        .rails.right { right: 6px; }
-        .rails i { width: 2px; height: 100%; }
-        .rails i:first-child { background: var(--red); }
-        .rails i:last-child { background: var(--blue); }
 
         .stage { position: relative; width: 100%; max-width: 640px; }
 
@@ -105,7 +99,6 @@
         @keyframes seat { from { opacity: 0; transform: translateY(-14px); } }
 
         @media (max-width: 720px) {
-            .rails { display: none; }
             body { padding-left: 20px; padding-right: 20px; }
             .chip { padding: calc(var(--pitch) * 1.75) calc(var(--pitch) * 1.25) calc(var(--pitch) * 2); }
         }
@@ -117,8 +110,6 @@
     </style>
 </head>
 <body>
-    <div class="rails left" aria-hidden="true"><i></i><i></i></div>
-    <div class="rails right" aria-hidden="true"><i></i><i></i></div>
 
     <main class="stage">
         <svg class="loose" viewBox="0 0 140 400" aria-hidden="true">
