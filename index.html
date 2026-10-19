@@ -3,230 +3,743 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dimitris Vatousis</title>
+    <meta name="description" content="Dimitris Vatousis works across hardware and software: electronics, embedded systems and robotics, machine learning, and production platforms for EV charging.">
+    <meta name="theme-color" content="#edf0f2">
+    <meta property="og:title" content="Dimitris Vatousis">
+    <meta property="og:description" content="Hardware, software, and the space between.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tsipidev.github.io/">
+    <meta property="og:image" content="https://tsipidev.github.io/profile_pic.jpg">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --board: #edf0f2;
+            --board-edge: #dde1e4;
+            --hole: #cfd4d8;
+            --ink: #15171a;
+            --ink-2: #3a3e44;
+            --ink-3: #5c6168;
+            --chip: #17191c;
+            --chip-2: #22252a;
+            --chip-text: #f4f4f1;
+            --chip-muted: #b9bdc3;
+            --pin: #a9aca7;
+            --red: #d7372b;
+            --blue: #2457c5;
+            --yellow: #f0b429;
+            --green: #2f9e5e;
+            --pitch: 24px;
+            --gutter: clamp(20px, 5vw, 72px);
+            --max: 1128px;
+            --nav-h: 72px;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-seat: cubic-bezier(0.34, 1.4, 0.64, 1);
+            --display: 'Barlow Semi Condensed', 'Arial Narrow', sans-serif;
+            --text: 'Barlow', system-ui, -apple-system, 'Segoe UI', sans-serif;
         }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--nav-h) + var(--pitch));
+            -webkit-text-size-adjust: 100%;
+            background: var(--board);
+            scrollbar-color: var(--chip) var(--board-edge);
         }
+
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            color: #fff;
+            font-family: var(--text);
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--ink-2);
+            background-color: var(--board);
+            background-image: radial-gradient(circle at center, var(--hole) 0 2.2px, transparent 2.8px);
+            background-size: var(--pitch) var(--pitch);
+            background-position: calc(var(--pitch) / 2) calc(var(--pitch) / 2);
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            caret-color: var(--blue);
         }
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
+
+        ::selection { background: var(--yellow); color: var(--ink); }
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: var(--board-edge); }
+        ::-webkit-scrollbar-thumb { background: var(--chip); border-radius: 3px; border: 3px solid var(--board-edge); }
+
+        a { color: inherit; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+        :focus-visible { outline: 2px dashed var(--blue); outline-offset: 4px; }
+        h1, h2, h3 { font-family: var(--display); color: var(--ink); }
+
+        .icon { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+        .icon-fill { fill: currentColor; stroke: none; }
+
+        .wrap { width: 100%; max-width: calc(var(--max) + var(--gutter) * 2); margin: 0 auto; padding: 0 var(--gutter); position: relative; }
+
+        .skip { position: absolute; left: 16px; top: -60px; z-index: 300; background: var(--chip); color: var(--chip-text); padding: 10px 14px; font-weight: 600; text-decoration: none; transition: top 0.2s var(--ease-out); }
+        .skip:focus { top: 12px; }
+
+        /* Power rails along both edges */
+        .rails { position: fixed; top: 0; bottom: 0; width: 22px; z-index: 5; pointer-events: none; display: flex; gap: 8px; justify-content: center; }
+        .rails.left { left: 6px; }
+        .rails.right { right: 6px; }
+        .rails i { width: 2px; height: 100%; }
+        .rails i:first-child { background: var(--red); }
+        .rails i:last-child { background: var(--blue); }
+
+        /* Chip primitive: matte body, metal pins top and bottom, pin one notch */
+        .chip {
+            position: relative;
+            background: var(--chip);
+            color: var(--chip-text);
+            border-radius: 5px;
+            box-shadow: 0 1px 0 #000, 0 12px 22px -12px rgba(10, 12, 14, 0.55);
         }
-        .site-title {
-            font-size: 24px;
-            font-weight: 600;
+        .chip.pins::before, .chip.pins::after {
+            content: ""; position: absolute; left: 22px; right: 22px; height: 9px; pointer-events: none;
+            background: repeating-linear-gradient(90deg, var(--pin) 0 9px, transparent 9px var(--pitch));
         }
+        .chip.pins::before { top: -9px; border-radius: 2px 2px 0 0; }
+        .chip.pins::after { bottom: -9px; border-radius: 0 0 2px 2px; }
+        .notch { position: absolute; left: 14px; top: 14px; width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid #6b7077; }
+        .print { font-family: var(--display); font-weight: 600; font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #8b9097; }
+
+        /* Nav */
+        .nav { position: fixed; inset: 0 0 auto 0; z-index: 100; height: var(--nav-h); transition: background-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out); }
+        .nav.scrolled { background: rgba(237, 240, 242, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 1px 0 var(--board-edge); }
+        .nav .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .brand { font-family: var(--display); font-weight: 800; font-size: 19px; letter-spacing: 0.04em; color: var(--ink); text-decoration: none; }
+        .brand .short { display: none; }
+        .nav-links { display: flex; gap: 10px; }
         .nav-links a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 18px;
-            margin: 0 15px;
-            transition: color 0.3s;
+            position: relative; display: inline-flex; align-items: center; gap: 8px;
+            background: var(--chip); color: var(--chip-text); text-decoration: none;
+            font-family: var(--display); font-weight: 600; font-size: 14.5px; letter-spacing: 0.1em; text-transform: uppercase;
+            padding: 9px 14px 10px; border-radius: 4px;
+            box-shadow: 0 1px 0 #000, 0 6px 12px -8px rgba(10, 12, 14, 0.6);
+            transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
         }
-        .nav-links a:hover {
-            color: #ff9f43;
+        .nav-links a::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: -3px; height: 3px; border-radius: 0 0 2px 2px; background: var(--wire); transform: scaleX(0.3); transition: transform 0.4s var(--ease-out); }
+        .nav-links a .led { width: 7px; height: 7px; border-radius: 50%; background: #3a3e44; transition: background-color 0.3s var(--ease-out); }
+        .nav-links a:hover { transform: translateY(-2px); box-shadow: 0 1px 0 #000, 0 12px 18px -10px rgba(10, 12, 14, 0.6); }
+        .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+        .nav-links a.active .led { background: var(--wire); }
+
+        .w-red { --wire: var(--red); }
+        .w-blue { --wire: var(--blue); }
+        .w-yellow { --wire: var(--yellow); }
+        .w-green { --wire: var(--green); }
+
+        /* Wires overlay */
+        .wires { position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; z-index: 1; overflow: visible; }
+        .wires path.core { fill: none; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+        .wires path.shine { fill: none; stroke: rgba(255, 255, 255, 0.35); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+        .wires rect.tip { fill: var(--pin); transition: opacity 0.3s var(--ease-out); }
+
+        main, footer { position: relative; z-index: 2; }
+
+        /* Hero */
+        .hero { padding: calc(var(--nav-h) + var(--pitch) * 4) 0 calc(var(--pitch) * 4); }
+        .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: calc(var(--pitch) * 2); align-items: start; }
+        .hero .chip { padding: calc(var(--pitch) * 2) calc(var(--pitch) * 2.25) calc(var(--pitch) * 1.75); }
+        .hero .chip .part { position: absolute; right: 22px; bottom: 16px; }
+        .hero h1 { color: var(--chip-text); font-weight: 800; font-size: clamp(52px, 8vw, 96px); line-height: 0.9; letter-spacing: -0.01em; }
+        .hero .tagline { margin-top: 20px; font-family: var(--display); font-weight: 500; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.2; color: var(--chip-muted); }
+        .hero .tagline b { color: var(--chip-text); font-weight: 600; }
+        .hero .lede { margin-top: calc(var(--pitch) * 2); max-width: 58ch; font-size: clamp(17px, 1.5vw, 19px); color: var(--ink-2); }
+        .hero .lede strong { color: var(--ink); font-weight: 600; }
+        .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: var(--pitch); }
+
+        .portrait { width: clamp(150px, 16vw, 216px); margin-top: var(--pitch); text-align: center; }
+        .portrait .frame { border-radius: 50%; padding: 7px; background: var(--chip); box-shadow: 0 1px 0 #000, 0 14px 24px -14px rgba(10, 12, 14, 0.6); }
+        .portrait img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 50%; }
+        .portrait .print { display: block; margin-top: 12px; color: var(--ink-3); }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-family: var(--display); font-weight: 600; font-size: 17px; letter-spacing: 0.06em; text-transform: uppercase;
+            padding: 13px 20px; border-radius: 4px; text-decoration: none;
+            transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), background-color 0.3s var(--ease-out), color 0.3s var(--ease-out);
         }
-        section {
-            padding: 120px 50px 50px;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
+        .btn-primary { background: var(--yellow); color: var(--ink); box-shadow: 0 1px 0 #b98714, 0 8px 16px -10px rgba(10, 12, 14, 0.5); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 1px 0 #b98714, 0 14px 22px -12px rgba(10, 12, 14, 0.55); }
+        .btn-plain { color: var(--ink); border: 2px solid var(--ink); }
+        .btn-plain:hover { background: var(--ink); color: var(--board); }
+        .btn:active { transform: translateY(1px); }
+        .btn .icon { transition: transform 0.3s var(--ease-out); }
+        .btn:hover .icon-move { transform: translateX(3px); }
+
+        /* Document chips: the thesis PDFs as parts you pull off the board */
+        .doc-chips { display: flex; flex-wrap: wrap; gap: var(--pitch) 16px; margin-top: calc(var(--pitch) * 1.5); padding: 9px 0; }
+        .doc-chip {
+            display: inline-flex; align-items: center; gap: 14px; min-width: 0;
+            padding: 16px 18px 16px 34px; text-decoration: none;
+            transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
         }
-        .content-box {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s;
-            width: 80%;
-            max-width: 600px;
-            margin-top: 30px;
+        .doc-chip .notch { top: 50%; margin-top: -5px; }
+        .doc-chip .icon { width: 22px; height: 22px; color: var(--chip-muted); }
+        .doc-chip .dl { display: flex; flex-direction: column; gap: 2px; }
+        .doc-chip .dl b { font-family: var(--display); font-weight: 600; font-size: 18px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--chip-text); line-height: 1.1; }
+        .doc-chip .lang { margin-left: 6px; min-width: 34px; text-align: center; padding: 5px 6px; border-radius: 3px; background: var(--yellow); color: var(--ink); font-family: var(--display); font-weight: 700; font-size: 14px; letter-spacing: 0.08em; }
+        .doc-chip:hover { transform: translateY(-4px); box-shadow: 0 1px 0 #000, 0 22px 30px -16px rgba(10, 12, 14, 0.6); }
+        .doc-chip:hover .icon { color: var(--chip-text); }
+        .doc-chip:active { transform: translateY(1px); }
+
+        /* Sections */
+        section.block { padding: calc(var(--pitch) * 4) 0; }
+        .label { display: inline-flex; align-items: center; gap: 14px; padding: 14px 22px 14px 36px; margin-bottom: calc(var(--pitch) * 2); }
+        .label h2 { color: var(--chip-text); font-weight: 700; font-size: clamp(28px, 3.4vw, 40px); line-height: 1; letter-spacing: 0.01em; }
+        .label .notch { top: 50%; margin-top: -5px; }
+        .label .led { width: 9px; height: 9px; border-radius: 50%; background: var(--wire); }
+
+        /* Experience */
+        .job { display: grid; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr); gap: calc(var(--pitch) * 2.5); }
+        .job .co { font-family: var(--display); font-weight: 700; font-size: 30px; line-height: 1.1; color: var(--ink); }
+        .job .meta { color: var(--ink-3); font-size: 15px; margin-top: 4px; }
+        .roles { list-style: none; margin-top: var(--pitch); position: relative; padding-left: 26px; }
+        .roles::before { content: ""; position: absolute; left: 5px; top: 10px; bottom: 12px; width: 3px; border-radius: 2px; background: var(--red); }
+        .roles li { position: relative; padding-bottom: 18px; }
+        .roles li:last-child { padding-bottom: 0; }
+        .roles li::before { content: ""; position: absolute; left: -26px; top: 6px; width: 13px; height: 13px; border-radius: 50%; background: var(--board); border: 2px solid var(--chip); }
+        .roles li.now::before { background: var(--red); }
+        .roles b { display: block; font-family: var(--display); font-weight: 600; font-size: 19px; color: var(--ink); }
+        .roles span { font-size: 14.5px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+        .job .desc > p { font-size: 19px; color: var(--ink); max-width: 62ch; }
+        .points { list-style: none; margin-top: 20px; display: grid; gap: 12px; max-width: 70ch; }
+        .points li { position: relative; padding-left: 28px; }
+        .points li::before { content: ""; position: absolute; left: 0; top: 10px; width: 14px; height: 4px; border-radius: 2px; background: var(--chip); }
+
+        /* Projects: DIP switch filter */
+        .projects-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: var(--pitch); margin-bottom: var(--pitch); }
+        .projects-head .label { margin-bottom: 0; }
+        .dip { display: inline-flex; flex-direction: column; align-items: stretch; }
+        .dip-body { display: flex; gap: 16px; background: var(--blue); padding: 12px 14px 10px; border-radius: 4px; box-shadow: 0 1px 0 #163a87, 0 10px 18px -12px rgba(10, 12, 14, 0.55); }
+        .dip-body .on-mark { font-family: var(--display); font-weight: 700; font-size: 11px; letter-spacing: 0.12em; color: #dbe5fb; writing-mode: vertical-rl; transform: rotate(180deg); align-self: center; margin-right: 2px; }
+        .switch { appearance: none; border: 0; background: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; font: inherit; color: inherit; }
+        .switch .slot { width: 22px; height: 40px; background: #0f2e72; border-radius: 3px; position: relative; box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.45); }
+        .switch .slot::after { content: ""; position: absolute; left: 3px; right: 3px; height: 16px; bottom: 3px; background: #f6f6f3; border-radius: 2px; box-shadow: 0 1px 0 #b9bcc0; transition: transform 0.35s var(--ease-seat); }
+        .switch[aria-pressed="true"] .slot::after { transform: translateY(-18px); }
+        .switch:hover .slot { background: #0b2560; }
+        .switch .n { font-family: var(--display); font-weight: 600; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; white-space: nowrap; }
+        .switch:focus-visible { outline-color: #fff; }
+        .dip-status { font-size: 14px; color: var(--ink-3); margin-top: 8px; }
+
+        .grid { display: grid; grid-auto-flow: dense; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--pitch) * 1.5) var(--pitch); padding-top: 9px; }
+        .project {
+            display: flex; flex-direction: column; padding: 34px 26px 26px;
+            transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out);
         }
-        .content-box:hover {
-            transform: translateY(-5px);
+        .project[hidden] { display: none; }
+        .project.wide { grid-column: span 2; padding: 38px 32px 30px; }
+        .project.wide h3 { font-size: 30px; }
+        .project.wide p { font-size: 16.5px; max-width: 52ch; }
+        .project:hover, .project:focus-within { transform: translateY(-4px); box-shadow: 0 1px 0 #000, 0 22px 30px -16px rgba(10, 12, 14, 0.6); }
+        .project .area { margin-left: auto; white-space: nowrap; }
+        .project .foot { flex-wrap: wrap; }
+        .project .link { white-space: nowrap; }
+        .project h3 { color: var(--chip-text); font-weight: 700; font-size: 24px; line-height: 1.15; letter-spacing: 0.005em; margin-top: 6px; text-wrap: balance; }
+        .project p { color: var(--chip-muted); font-size: 15.5px; margin-top: 10px; }
+        .project .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+        .project .stack span { font-size: 12.5px; color: var(--chip-text); padding: 2px 8px; border: 1px solid #3b3f46; border-radius: 3px; }
+        .project .foot { margin-top: auto; padding-top: 22px; font-size: 15px; display: flex; align-items: center; gap: 10px; color: var(--chip-muted); }
+        .project .link { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--chip-text); text-decoration: none; }
+        .project .link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+        .project .link:focus-visible { outline: none; }
+        .project:has(.link:focus-visible) { outline: 2px dashed var(--blue); outline-offset: 6px; }
+        .project .link .icon-arrow { width: 16px; height: 16px; transition: transform 0.3s var(--ease-out); }
+        .project:hover .icon-arrow { transform: translate(2px, -2px); }
+
+        /* Research: a list that grows */
+        .research-list { list-style: none; display: grid; gap: calc(var(--pitch) * 3); }
+        .entry { display: grid; grid-template-columns: minmax(180px, 240px) minmax(0, 1fr); gap: calc(var(--pitch) * 2.5); }
+        .entry .when { font-family: var(--display); font-weight: 700; font-size: 34px; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+        .entry .kind { margin-top: 8px; color: var(--ink-3); font-size: 15px; }
+        .entry .tag { display: inline-block; margin-top: 14px; background: var(--yellow); color: var(--ink); font-family: var(--display); font-weight: 600; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 9px; border-radius: 3px; }
+        .entry h3 { font-weight: 700; font-size: clamp(24px, 2.6vw, 32px); line-height: 1.15; text-wrap: balance; }
+        .entry .abstract { margin-top: 14px; max-width: 66ch; }
+        .entry .setup { margin-top: var(--pitch); display: grid; font-size: 15.5px; max-width: 70ch; }
+        .entry .setup div { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 16px; padding: 10px 0; border-top: 1px solid var(--board-edge); }
+        .entry .setup div:last-child { border-bottom: 1px solid var(--board-edge); }
+        .entry .setup dt { color: var(--ink-3); }
+        .entry .setup dd { color: var(--ink); }
+        .entry .findings { list-style: none; margin-top: var(--pitch); display: grid; gap: 10px; max-width: 70ch; }
+        .entry .findings li { position: relative; padding-left: 28px; }
+        .entry .findings li::before { content: ""; position: absolute; left: 0; top: 7px; width: 12px; height: 12px; border-radius: 2px; background: var(--yellow); box-shadow: inset 0 0 0 1.5px var(--ink); }
+        .entry .findings strong { color: var(--ink); font-weight: 600; }
+
+        /* About */
+        .about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: calc(var(--pitch) * 2.5); align-items: start; }
+        .about p { max-width: 60ch; font-size: 18px; }
+        .about p + p { margin-top: 16px; }
+        .about p strong { color: var(--ink); font-weight: 600; }
+        .contact { padding: 34px 28px 28px; }
+        .contact h3 { color: var(--chip-text); font-size: 28px; font-weight: 700; }
+        .contact > p { color: var(--chip-muted); margin-top: 6px; }
+        .contact ul { list-style: none; margin-top: var(--pitch); display: grid; gap: 10px; }
+        .contact a {
+            display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; align-items: center; gap: 4px 14px;
+            padding: 14px 16px; border-radius: 4px; text-decoration: none; background: var(--chip-2); color: var(--chip-text);
+            transition: background-color 0.3s var(--ease-out), transform 0.3s var(--ease-out);
         }
-        .info-link {
-            display: inline-flex;
-            align-items: center;
-            font-size: 18px;
-            text-decoration: none;
-            color: #fff;
-            background: #ff9f43;
-            padding: 10px 20px;
-            border-radius: 8px;
-            transition: background 0.3s;
-            margin: 5px;
+        .contact a:hover { background: #2c3036; transform: translateX(4px); }
+        .contact .k { font-family: var(--display); font-weight: 600; font-size: 17px; letter-spacing: 0.06em; text-transform: uppercase; }
+        .contact .v { color: var(--chip-muted); font-size: 15px; text-align: right; overflow-wrap: anywhere; }
+        .contact .hdr { display: inline-flex; gap: 4px; }
+        .contact .hdr i { width: 7px; height: 14px; background: var(--pin); border-radius: 1px; }
+        .contact .hdr i:first-child { background: var(--green); }
+
+        footer { padding: calc(var(--pitch) * 2) 0 calc(var(--pitch) * 3); font-size: 15px; color: var(--ink-3); }
+        footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+        footer a { color: var(--ink); font-weight: 600; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        /* Motion */
+        @keyframes seat {
+            0% { opacity: 0; transform: translateY(-18px) scale(1.02); }
+            70% { opacity: 1; }
+            100% { opacity: 1; transform: none; }
         }
-        .info-link:hover {
-            background: #ff7b00;
+        @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+        .hero .chip { animation: seat 0.9s 0.1s var(--ease-seat) backwards; }
+        .portrait { animation: seat 0.9s 0.3s var(--ease-seat) backwards; }
+        .hero .lede, .hero .actions { animation: rise 0.9s var(--ease-out) backwards; }
+        .hero .lede { animation-delay: 0.45s; }
+        .hero .actions { animation-delay: 0.55s; }
+
+        .js .reveal { transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out); transition-delay: var(--d, 0s); }
+        .js .reveal:not(.in) { opacity: 0; transform: translateY(18px); }
+        .js .label.reveal { transition: opacity 0.6s var(--ease-out), transform 0.7s var(--ease-seat); }
+        .js .label.reveal:not(.in) { transform: translateY(-14px); }
+
+        ::view-transition-group(*) { animation-duration: 0.5s; animation-timing-function: var(--ease-out); }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+            .js .reveal:not(.in) { opacity: 1; transform: none; }
         }
-        .info-link i {
-            margin-right: 10px;
+
+        /* Responsive */
+        @media (max-width: 960px) {
+            .hero-grid { grid-template-columns: 1fr; }
+            .portrait { order: -1; width: 120px; margin: 0 0 var(--pitch); text-align: left; }
+            .portrait .print { display: none; }
+            .job, .entry, .about { grid-template-columns: 1fr; gap: var(--pitch); }
+            .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .project.wide { grid-column: auto; }
         }
-        .trademark {
-            text-align: center;
-            padding: 20px;
-            font-size: 14px;
-            color: #ccc;
+        @media (max-width: 720px) {
+            .brand .full { display: none; }
+            .brand .short { display: inline; }
+            .nav-links { gap: 6px; }
+            .nav-links a { font-size: 12.5px; letter-spacing: 0.06em; padding: 8px 9px 9px; }
+            .nav-links a .led { display: none; }
+            :root { --gutter: 34px; }
+            .rails { display: none; }
+            .grid { grid-template-columns: 1fr; }
+            .project.wide { grid-column: auto; padding: 34px 24px 26px; }
+            .project.wide h3 { font-size: 24px; }
+            .wires path.core { stroke-width: 4; }
+            .hero-grid { position: relative; }
+            .portrait { position: absolute; right: calc(var(--gutter) + 12px); top: 0; width: 96px; margin: 0; z-index: 3; }
+            .hero-grid > div:first-child { padding-top: 52px; }
+            .hero { padding-top: calc(var(--nav-h) + var(--pitch) * 2); }
+            .hero .chip { padding: 40px 22px 30px; }
+            .hero .chip .part { right: 14px; bottom: 12px; }
+            .label { padding: 12px 18px 12px 32px; }
+            .projects-head { flex-direction: column; align-items: flex-start; }
+            .contact .v { grid-column: 2 / -1; text-align: left; }
+            .btn { flex: 1 1 auto; justify-content: center; }
+            .doc-chip { flex: 1 1 100%; }
         }
-        .project-images img {
-            width: 30%;
-            border-radius: 8px;
-            margin: 10px;
-        }
-        .badge-row {
-            margin: 10px 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 6px;
-        }
-        .badge-row img {
-            width: auto;
-            height: 22px;
-            border-radius: 4px;
+        @media (max-width: 380px) {
+            .nav-links a { font-size: 12px; padding: 8px 7px 9px; letter-spacing: 0.04em; }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="site-title">Dimitris Vatousis</div>
-        <div class="nav-links">
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
-            <a href="#research">Research</a>
-            <a href="#information">Information</a>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+        <symbol id="i-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></symbol>
+        <symbol id="i-gh" viewBox="0 0 24 24"><path d="M12 2.5a9.5 9.5 0 0 0-3 18.52c.48.09.65-.2.65-.46v-1.6c-2.64.57-3.2-1.27-3.2-1.27-.43-1.1-1.06-1.4-1.06-1.4-.86-.59.07-.58.07-.58.95.07 1.45.98 1.45.98.85 1.45 2.22 1.03 2.76.79.09-.61.33-1.03.6-1.27-2.1-.24-4.32-1.05-4.32-4.69 0-1.03.37-1.88.98-2.54-.1-.24-.42-1.2.09-2.5 0 0 .8-.26 2.61.97a9.05 9.05 0 0 1 4.75 0c1.81-1.23 2.61-.97 2.61-.97.51 1.3.19 2.26.09 2.5.61.66.98 1.51.98 2.54 0 3.65-2.22 4.45-4.34 4.68.34.3.65.88.65 1.78v2.64c0 .26.17.56.66.46A9.5 9.5 0 0 0 12 2.5Z"/></symbol>
+        <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+    </svg>
+
+    <a class="skip" href="#main">Skip to content</a>
+
+    <div class="rails left" aria-hidden="true"><i></i><i></i></div>
+    <div class="rails right" aria-hidden="true"><i></i><i></i></div>
+
+    <header class="nav" id="nav">
+        <div class="wrap">
+            <a class="brand" href="#top" aria-label="Dimitris Vatousis, back to top"><span class="full">Dimitris Vatousis</span><span class="short">DV</span></a>
+            <nav class="nav-links" aria-label="Sections">
+                <a class="w-red" href="#experience"><span class="led" aria-hidden="true"></span>Experience</a>
+                <a class="w-blue" href="#projects"><span class="led" aria-hidden="true"></span>Projects</a>
+                <a class="w-yellow" href="#research"><span class="led" aria-hidden="true"></span>Research</a>
+                <a class="w-green" href="#about"><span class="led" aria-hidden="true"></span>About</a>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <section id="experience" class="active">
-        <h1>Experience</h1>
-        <div class="content-box">Coming Soon !!</div>
-    </section>
+    <svg class="wires" id="wires" aria-hidden="true"></svg>
 
-    <section id="projects">
-        <h1>Projects</h1>
-
-        <!-- Project 1 -->
-        <div class="content-box">
-            <strong>Kaggle: Child Mind Institute - Problematic Internet Use Competition Model</strong>
-            <p>Bronze Medal-Winning Code: 180th place solution out of 3560 Teams</p>
-            <div class="project-images">
-                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.kaggle.com%2Fstatic%2Fimages%2Flogos%2Fkaggle-logo-transparent-300.png&f=1&nofb=1&ipt=c478cf4ea220e576d94763d87a278259153f84ab83d758ab7cf5ce0a6322501c" alt="Kaggle">
-                <img src="https://lh3.googleusercontent.com/proxy/Iey_H-EK4UL_Bcvwyabn_ijbIevLGt5dbeIrTNTl8LU9Y4Jfgn62rG0_veFMGztVl1bpXgMTVrLenGQp2yiKQuQFK8UG48oY9lsre8BK73M" alt="Project Screenshot 2">
-                <img src="https://fcon_1000.projects.nitrc.org/indi/cmi_eeg/_images/cmi_small.png" alt="CMI">
+    <main id="main">
+        <section class="hero" id="top">
+            <div class="wrap hero-grid">
+                <div>
+                    <div class="chip pins" id="hero-chip">
+                        <span class="notch" aria-hidden="true"></span>
+                        <h1>Dimitris Vatousis</h1>
+                        <p class="tagline"><b>Hardware, software,</b> and the space between.</p>
+                        <span class="print part" aria-hidden="true">DV-2026</span>
+                    </div>
+                    <p class="lede"><strong>Dimitris Vatousis</strong> works across electronics, embedded systems, machine learning and production software. He currently builds roaming platforms for EV charging at Parity Platform (EV Loader) in Athens.</p>
+                    <div class="actions">
+                        <a class="btn btn-primary" href="mailto:dimitrisvatoussis@gmail.com"><svg class="icon"><use href="#i-mail"/></svg>Get in touch</a>
+                        <a class="btn btn-plain" href="#projects">View projects<svg class="icon icon-move"><use href="#i-right"/></svg></a>
+                    </div>
+                </div>
+                <div class="portrait">
+                    <div class="frame"><img src="profile_pic.jpg" alt="Portrait of Dimitris Vatousis" width="216" height="216" fetchpriority="high"></div>
+                    <span class="print">Athens, Greece</span>
+                </div>
             </div>
-            <div style="margin-top: 10px;">
-                <a href="https://github.com/kw5t45/Child_mind_institute_MLV" class="info-link" target="_blank">
-                    <i class="fab fa-github"></i> View on GitHub
-                </a>
+        </section>
+
+        <section class="block" id="experience" aria-labelledby="experience-title">
+            <div class="wrap">
+                <div class="chip label w-red reveal" data-socket><span class="notch" aria-hidden="true"></span><h2 id="experience-title">Experience</h2><span class="led" aria-hidden="true"></span></div>
+                <article class="job reveal">
+                    <div>
+                        <div class="co">Parity Platform</div>
+                        <div class="meta">EV Loader · Athens, Greece · Hybrid</div>
+                        <ol class="roles" aria-label="Roles">
+                            <li class="now"><b>Software Developer</b><span>Full-time · Aug 2026 to present</span></li>
+                            <li><b>Software Developer</b><span>Internship · Jun 2026 to Aug 2026</span></li>
+                        </ol>
+                    </div>
+                    <div class="desc">
+                        <p>I work on the company's OCPI 2.2.1 roaming platform, which connects EV charge points to the mobility providers whose drivers use them.</p>
+                        <ul class="points">
+                            <li>Built the eMSP role from scratch, designed to run alongside the existing CPO platform and work with it from day one.</li>
+                            <li>Found and fixed critical defects in the CPO platform affecting sessions, commands, token authorization and partner synchronisation.</li>
+                            <li>Built the web operations consoles for both roles: live charging sessions, partner traffic tracing, finance and revenue reporting, and audited staff actions.</li>
+                            <li>Built the payment terminal module, which lets drivers pay for charging directly at the charge point, including invoicing.</li>
+                            <li>Hardened the platform through repeated security and compliance audits.</li>
+                        </ul>
+                    </div>
+                </article>
             </div>
+        </section>
+
+        <section class="block" id="projects" aria-labelledby="projects-title">
+            <div class="wrap">
+                <div class="projects-head">
+                    <div class="chip label w-blue reveal" data-socket><span class="notch" aria-hidden="true"></span><h2 id="projects-title">Projects</h2><span class="led" aria-hidden="true"></span></div>
+                    <div class="dip reveal" role="group" aria-label="Filter projects by area">
+                        <div class="dip-body">
+                            <span class="on-mark" aria-hidden="true">ON</span>
+                            <button class="switch" type="button" data-filter="all" aria-pressed="true" aria-label="All"><span class="slot"></span><span class="n" aria-hidden="true">All</span></button>
+                            <button class="switch" type="button" data-filter="plt" aria-pressed="false" aria-label="Platforms"><span class="slot"></span><span class="n" aria-hidden="true">Platforms</span></button>
+                            <button class="switch" type="button" data-filter="ml" aria-pressed="false" aria-label="Machine learning"><span class="slot"></span><span class="n" aria-hidden="true">ML</span></button>
+                            <button class="switch" type="button" data-filter="emb" aria-pressed="false" aria-label="Embedded"><span class="slot"></span><span class="n" aria-hidden="true">Embedded</span></button>
+                            <button class="switch" type="button" data-filter="spc" aria-pressed="false" aria-label="Space"><span class="slot"></span><span class="n" aria-hidden="true">Space</span></button>
+                        </div>
+                        
+                        <p class="dip-status" id="dip-status" aria-live="polite">Showing all 6 projects</p>
+                    </div>
+                </div>
+
+                <div class="grid" id="grid">
+                    <article class="chip pins project wide reveal" data-tags="plt" style="view-transition-name: p-evl">
+                        <span class="notch" aria-hidden="true"></span>
+                        <h3>EV Loader OCPI roaming platform</h3>
+                        <p>Production platform for EV charging roaming at Parity Platform: the eMSP role, operations consoles for both roles, and payment terminals.</p>
+                        <div class="stack"><span>OCPI 2.2.1</span><span>eMSP</span><span>CPO</span><span>Payments</span></div>
+                        <div class="foot"><svg class="icon" style="width:16px;height:16px"><use href="#i-lock"/></svg>Professional work, private code<span class="print area">Platforms</span></div>
+                    </article>
+
+                    <article class="chip pins project wide reveal" data-tags="ml emb" style="view-transition-name: p-thesis">
+                        <span class="notch" aria-hidden="true"></span>
+                        <h3>Energy efficient LLM inference on embedded hardware</h3>
+                        <p>Experiment software that measures real power draw while running small language models with quantization, pruning and dynamic precision scaling.</p>
+                        <div class="stack"><span>Python</span><span>llama-cpp-python</span><span>PyTorch</span><span>Raspberry Pi 400</span></div>
+                        <div class="foot"><a class="link" href="https://github.com/TsipiDev/Thesis_Code_Dimitris_Vatousis_220007" target="_blank" rel="noopener"><svg class="icon icon-fill"><use href="#i-gh"/></svg>View code<svg class="icon icon-arrow"><use href="#i-arrow"/></svg></a><span class="print area">ML · Embedded</span></div>
+                    </article>
+
+                    <article class="chip pins project reveal" data-tags="ml" style="view-transition-name: p-kaggle">
+                        <span class="notch" aria-hidden="true"></span>
+                        <h3>Kaggle: Child Mind Institute, Problematic Internet Use</h3>
+                        <p>Bronze medal solution, placing 180th out of 3,560 teams.</p>
+                        <div class="stack"><span>Python</span><span>Kaggle</span></div>
+                        <div class="foot"><a class="link" href="https://github.com/kw5t45/Child_mind_institute_MLV" target="_blank" rel="noopener"><svg class="icon icon-fill"><use href="#i-gh"/></svg>View code<svg class="icon icon-arrow"><use href="#i-arrow"/></svg></a><span class="print area">ML</span></div>
+                    </article>
+
+                    <article class="chip pins project reveal" data-tags="spc" style="view-transition-name: p-satcore">
+                        <span class="notch" aria-hidden="true"></span>
+                        <h3>SatCore: satellite mission control and telemetry</h3>
+                        <p>Open source ground segment toolkit: spacecraft health monitoring, telemetry forecasting, pass scheduling from real TLE data for 14,000+ satellites, and live 3D orbits.</p>
+                        <div class="stack"><span>Python</span><span>Streamlit</span><span>Plotly</span><span>MIT</span></div>
+                        <div class="foot"><a class="link" href="https://github.com/TsipiDev/satcore" target="_blank" rel="noopener"><svg class="icon icon-fill"><use href="#i-gh"/></svg>View code<svg class="icon icon-arrow"><use href="#i-arrow"/></svg></a><span class="print area">Space</span></div>
+                    </article>
+
+                    <article class="chip pins project reveal" data-tags="emb" style="view-transition-name: p-robot">
+                        <span class="notch" aria-hidden="true"></span>
+                        <h3>Line follower robot</h3>
+                        <p>Designed, built and programmed a line following robot with Arduino and infrared sensors for a university robotics competition.</p>
+                        <div class="stack"><span>Arduino</span><span>C++</span><span>IR sensors</span></div>
+                        <div class="foot"><a class="link" href="https://github.com/TsipiDev/Line_Follower_Robot_University_Competition" target="_blank" rel="noopener"><svg class="icon icon-fill"><use href="#i-gh"/></svg>View code<svg class="icon icon-arrow"><use href="#i-arrow"/></svg></a><span class="print area">Embedded</span></div>
+                    </article>
+
+                    <article class="chip pins project wide reveal" data-tags="emb ml" style="view-transition-name: p-armnn">
+                        <span class="notch" aria-hidden="true"></span>
+                        <h3>ARM NN and PyArmNN on Raspberry Pi</h3>
+                        <p>An up to date guide (July 2025) to building ARM NN with TensorFlow Lite and PyArmNN support, from dependencies to inference with a real TFLite model.</p>
+                        <div class="stack"><span>ARM NN</span><span>TensorFlow Lite</span><span>Raspberry Pi</span></div>
+                        <div class="foot"><a class="link" href="https://github.com/TsipiDev/PyArmNN_Installation_Guide_with_TensorFlow_Lite_Support" target="_blank" rel="noopener"><svg class="icon icon-fill"><use href="#i-gh"/></svg>Read the guide<svg class="icon icon-arrow"><use href="#i-arrow"/></svg></a><span class="print area">Embedded · ML</span></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="block" id="research" aria-labelledby="research-title">
+            <div class="wrap">
+                <div class="chip label w-yellow reveal" data-socket><span class="notch" aria-hidden="true"></span><h2 id="research-title">Research</h2><span class="led" aria-hidden="true"></span></div>
+                <!-- Research entries: add each new one as another <li class="entry reveal"> at the top of this list. -->
+                <ol class="research-list">
+                    <li class="entry reveal">
+                        <div>
+                            <div class="when">2026</div>
+                            <div class="kind">Undergraduate dissertation<br>Democritus University of Thrace</div>
+                            <span class="tag">Thesis</span>
+                        </div>
+                        <article>
+                            <h3>Research and Development of Energy-Efficient Inference Methods for Generative AI (LLMs) on Low-Power Embedded Systems</h3>
+                            <p class="abstract">A comparison of ways to run large language models on low power hardware, measuring what each one really costs in energy with an external hardware power meter instead of software estimates.</p>
+                            <dl class="setup">
+                                <div><dt>Hardware</dt><dd>Raspberry Pi 400, Atorch UD18 USB power meter</dd></div>
+                                <div><dt>Models</dt><dd>TinyLlama 1.1B, Llama 3.2 1B, Qwen2 0.5B</dd></div>
+                                <div><dt>Methods</dt><dd>fp16, INT8 (Q8_0), 30% unstructured pruning, dynamic precision scaling</dd></div>
+                                <div><dt>Supervisor</dt><dd>Assoc. Prof. Dimitrios Karampatzakis</dd></div>
+                            </dl>
+                            <ul class="findings" aria-label="Key findings">
+                                <li><strong>INT8 quantization cut energy per generated token by about 45%</strong> across all three models.</li>
+                                <li><strong>Power draw stayed nearly constant at 8.1 to 8.5 W,</strong> so energy is set mainly by how long inference runs.</li>
+                                <li><strong>Model size affected energy more than any optimisation technique.</strong> Pruning without retraining gave no benefit.</li>
+                            </ul>
+                            <div class="doc-chips">
+                                <a class="chip pins doc-chip" href="thesis/Vatousis_2026_Thesis_GR.pdf" target="_blank" rel="noopener" hreflang="el" type="application/pdf"><span class="notch" aria-hidden="true"></span><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg><span class="dl"><b>Read the thesis</b><span class="print">Original, Greek · PDF</span></span><span class="lang" aria-hidden="true">GR</span></a>
+                                <a class="chip pins doc-chip" href="thesis/Vatousis_2026_Thesis_EN.pdf" target="_blank" rel="noopener" hreflang="en" type="application/pdf"><span class="notch" aria-hidden="true"></span><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg><span class="dl"><b>Read the thesis</b><span class="print">English translation · PDF</span></span><span class="lang" aria-hidden="true">EN</span></a>
+                            </div>
+                            <div class="actions">
+                                <a class="btn btn-plain" href="https://github.com/TsipiDev/Thesis_Code_Dimitris_Vatousis_220007" target="_blank" rel="noopener"><svg class="icon icon-fill"><use href="#i-gh"/></svg>Experiment code<svg class="icon icon-move"><use href="#i-arrow"/></svg></a>
+                            </div>
+                        </article>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="block" id="about" aria-labelledby="about-title">
+            <div class="wrap">
+                <div class="chip label w-green reveal" data-socket><span class="notch" aria-hidden="true"></span><h2 id="about-title">About</h2><span class="led" aria-hidden="true"></span></div>
+                <div class="about">
+                    <div class="reveal">
+                        <p><strong>Dimitris Vatousis</strong> works across hardware and software: electronics, embedded systems and robotics on one side, machine learning and production platforms on the other.</p>
+                        <p>He studied in the Department of Informatics at the Democritus University of Thrace (DUTH) in Greece, and works at Parity Platform (EV Loader) in Athens.</p>
+                        <p>His interests include electronics, embedded systems, robotics, machine learning and network security.</p>
+                    </div>
+                    <div class="chip pins contact reveal" style="--d: 0.1s" id="contact">
+                        <span class="notch" aria-hidden="true"></span>
+                        <h3>Get in touch</h3>
+                        <p>Open to conversations about work, research and collaboration.</p>
+                        <ul>
+                            <li><a href="mailto:dimitrisvatoussis@gmail.com"><span class="hdr" aria-hidden="true"><i></i><i></i></span><span class="k">Email</span><span class="v">dimitrisvatoussis@gmail.com</span><svg class="icon"><use href="#i-arrow"/></svg></a></li>
+                            <li><a href="https://www.linkedin.com/in/dimitris-vatousis/" target="_blank" rel="noopener"><span class="hdr" aria-hidden="true"><i></i><i></i></span><span class="k">LinkedIn</span><span class="v">in/dimitris-vatousis</span><svg class="icon"><use href="#i-arrow"/></svg></a></li>
+                            <li><a href="https://github.com/TsipiDev" target="_blank" rel="noopener"><span class="hdr" aria-hidden="true"><i></i><i></i></span><span class="k">GitHub</span><span class="v">TsipiDev</span><svg class="icon"><use href="#i-arrow"/></svg></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <span>© 2026 Dimitris Vatousis</span>
+            <a href="#top">Back to top</a>
         </div>
+    </footer>
 
-        <!-- Project 2 -->
-        <div class="content-box">
-            <strong>Line Follower Robot - University Competition Entry</strong>
-            <p>Designed, built, and programmed a robust line-following robot using Arduino and infrared sensors for university-level robotics competition.</p>
-            <div class="project-images" style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                <img src="https://github.com/TsipiDev/Line_Follower_Robot_University_Competition/raw/main/Final%20Robot%20Build.jpeg?raw=true" alt="Robot" style="width: 45%; height: 150px; object-fit: cover; border-radius: 8px;">
-                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fassets.onthehub.com%2Fattachments%2F15%2F04fcc2c1-7da7-ed11-8153-000d3af41938%2Ffff7ec47-ac54-460d-abe8-118808d0cee3.png&f=1&nofb=1&ipt=c00ea71fc0b36346fad1ed188cf5960559a74655a68f5acd5174308f2b355453" alt="DUTH" style="width: 45%; height: 150px; object-fit: contain; border-radius: 8px;">
-            </div>
-            <div style="margin-top: 10px;">
-                <a href="https://github.com/TsipiDev/Line_Follower_Robot_University_Competition" class="info-link" target="_blank">
-                    <i class="fab fa-github"></i> View on GitHub
-                </a>
-            </div>
-        </div>
+    <script>
+        (function () {
+            document.documentElement.classList.add('js');
+            var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var SVGNS = 'http://www.w3.org/2000/svg';
 
-        <!-- Project 3 -->
-        <div class="content-box">
-            <strong>ARM NN & PyArmNN Installation Guide with TensorFlow Lite Support</strong>
-            <p>A complete up to date guide (As of July 2025) I wrote to building ARM NN with TensorFlow Lite and PyArmNN support on a Raspberry Pi, including step-by-step installation, dependency setup, and inference with a real TFLite model.</p>
-            <div class="project-images" style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/cb/Raspberry_Pi_Logo.svg/120px-Raspberry_Pi_Logo.svg.png" alt="Pi Logo" style="width: 45%; height: 100px; object-fit: contain; border-radius: 8px;">
-                <img src="https://arm-software.github.io/armnn/24.02/Arm_NN_horizontal_blue.png" alt="ARM NN Logo" style="width: 45%; height: 100px; object-fit: contain; border-radius: 8px;">
-            </div>
-            <div style="margin-top: 10px;">
-                <a href="https://github.com/TsipiDev/PyArmNN_Installation_Guide_with_TensorFlow_Lite_Support" class="info-link" target="_blank">
-                    <i class="fab fa-github"></i> View on GitHub
-                </a>
-            </div>
-        </div>
+            var nav = document.getElementById('nav');
+            function onScrollNav() { nav.classList.toggle('scrolled', window.scrollY > 8); }
 
-        <!-- Project 4 -->
-        <div class="content-box">
-            <strong>SatCore — Satellite Mission Control & Telemetry Analysis Platform</strong>
-            <p style="margin: 10px 0;">Open-source ground segment toolkit for satellite operations. Features real-time spacecraft health monitoring, telemetry analysis with threshold forecasting, ground station pass scheduling using real TLE orbital data from 14,000+ satellites, and live 3D orbital visualization.</p>
-            <div class="badge-row">
-                <img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
-                <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white" alt="Streamlit">
-                <img src="https://img.shields.io/badge/Plotly-3F4F75?style=flat-square&logo=plotly&logoColor=white" alt="Plotly">
-                <img src="https://img.shields.io/badge/License-MIT-00FFB2?style=flat-square" alt="MIT">
-            </div>
-            <div style="margin-top: 10px;">
-                <a href="https://github.com/TsipiDev/satcore" class="info-link" target="_blank">
-                    <i class="fab fa-github"></i> View on GitHub
-                </a>
-            </div>
-        </div>
+            // Active section LED in the nav
+            var links = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+            var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+            var current;
+            function pickSection() {
+                var mark = window.innerHeight * 0.35, found = null;
+                sections.forEach(function (s) { if (s.getBoundingClientRect().top <= mark) found = s.id; });
+                if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) found = sections[sections.length - 1].id;
+                if (found === current) return;
+                current = found;
+                links.forEach(function (a) {
+                    var on = a.getAttribute('href') === '#' + found;
+                    a.classList.toggle('active', on);
+                    if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+                });
+            }
 
-    </section>
+            // Jumper wires from each nav chip to its section label, drawn as the page scrolls
+            var svg = document.getElementById('wires');
+            var colors = ['var(--red)', 'var(--blue)', 'var(--yellow)', 'var(--green)'];
+            var sockets = Array.prototype.slice.call(document.querySelectorAll('[data-socket]'));
+            var wires = [];
 
-    <section id="research">
-        <h1>Research</h1>
-        <div class="content-box">Coming Soon !!</div>
-    </section>
+            function roundedPath(pts, r) {
+                var d = 'M' + pts[0][0] + ' ' + pts[0][1];
+                for (var i = 1; i < pts.length - 1; i++) {
+                    var p0 = pts[i - 1], p1 = pts[i], p2 = pts[i + 1];
+                    var d1 = Math.hypot(p1[0] - p0[0], p1[1] - p0[1]), d2 = Math.hypot(p2[0] - p1[0], p2[1] - p1[1]);
+                    var rr = Math.min(r, d1 / 2, d2 / 2);
+                    var a = [p1[0] - (p1[0] - p0[0]) / d1 * rr, p1[1] - (p1[1] - p0[1]) / d1 * rr];
+                    var b = [p1[0] + (p2[0] - p1[0]) / d2 * rr, p1[1] + (p2[1] - p1[1]) / d2 * rr];
+                    d += ' L' + a[0] + ' ' + a[1] + ' Q' + p1[0] + ' ' + p1[1] + ' ' + b[0] + ' ' + b[1];
+                }
+                var last = pts[pts.length - 1];
+                return d + ' L' + last[0] + ' ' + last[1];
+            }
 
-    <section id="information">
-        <h1>Information</h1>
-        <div class="content-box">
-            <strong>About Me:</strong>
-            <p>Dimitris Vatousis is an undergraduate student in the Computer Science department at the Democritus University of Thrace in Greece (DUTH).<br><br>
-                His academic interests include software engineering, machine learning, robotics, embedded systems and network security.</p>
-            <br>
-            <img src="https://github.com/TsipiDev/TsipiDev.github.io/blob/main/profile_pic.jpg?raw=true" alt="Dimitris Vatousis" style="width: 150px; height: 150px; border-radius: 50%; margin-bottom: 15px;">
-            <br>
-            <a href="https://www.linkedin.com/in/dimitris-vatousis/" class="info-link" target="_blank">
-                <i class="fab fa-linkedin"></i> LinkedIn
-            </a>
-            <a href="mailto:dimitrisvatoussis@gmail.com" class="info-link">
-                <i class="fas fa-envelope"></i> Email Me
-            </a>
-        </div>
-    </section>
+            function layoutWires() {
+                svg.innerHTML = '';
+                wires = [];
+                svg.style.height = '0px';
+                var docH = document.documentElement.scrollHeight;
+                svg.setAttribute('width', document.documentElement.clientWidth);
+                svg.setAttribute('height', docH);
+                svg.style.height = docH + 'px';
+                var sy = window.scrollY;
+                var heroLeft = document.getElementById('hero-chip').getBoundingClientRect().left;
+                var wide = heroLeft >= 120;
+                var gap = wide ? 14 : 6, inset = wide ? 44 : 8;
+                var navBottom = 56;
 
-    <div class="trademark">© Dimitris Vatousis</div>
+                links.forEach(function (a, i) {
+                    var sr = sockets[i].getBoundingClientRect();
+                    var sx = sr.left, sy2 = sr.top + sy + sr.height / 2;
+                    var ar = a.getBoundingClientRect();
+                    var startX = ar.left + ar.width / 2;
+                    var laneY = navBottom + (wide ? 34 : 26) + i * (wide ? 12 : 8);
+                    var laneX = Math.max(4, heroLeft - inset - (3 - i) * gap);
+                    var pts = [[startX, navBottom], [startX, laneY], [laneX, laneY], [laneX, sy2], [sx - 4, sy2]];
+                    var d = roundedPath(pts, 14);
+                    var g = document.createElementNS(SVGNS, 'g');
+                    var core = document.createElementNS(SVGNS, 'path');
+                    core.setAttribute('d', d);
+                    core.setAttribute('class', 'core');
+                    core.style.stroke = colors[i];
+                    var shine = document.createElementNS(SVGNS, 'path');
+                    shine.setAttribute('d', d);
+                    shine.setAttribute('class', 'shine');
+                    var tip = document.createElementNS(SVGNS, 'rect');
+                    tip.setAttribute('class', 'tip');
+                    tip.setAttribute('x', sx - 12);
+                    tip.setAttribute('y', sy2 - 2.5);
+                    tip.setAttribute('width', 10);
+                    tip.setAttribute('height', 5);
+                    g.appendChild(core); g.appendChild(shine); g.appendChild(tip);
+                    svg.appendChild(g);
+                    var len = core.getTotalLength();
+                    core.style.strokeDasharray = shine.style.strokeDasharray = len + ' ' + len;
+                    wires.push({ core: core, shine: shine, tip: tip, len: len, startY: pts[0][1], endY: sy2 });
+                });
+                drawWires();
+            }
+
+            function drawWires() {
+                var reach = window.scrollY + window.innerHeight * 0.72;
+                wires.forEach(function (w) {
+                    var p = reduced ? 1 : Math.max(0, Math.min(1, (reach - w.startY) / (w.endY - w.startY)));
+                    var off = w.len * (1 - p);
+                    w.core.style.strokeDashoffset = off;
+                    w.shine.style.strokeDashoffset = off;
+                    w.tip.style.opacity = p >= 1 ? 1 : 0;
+                });
+            }
+
+            var ticking = false;
+            window.addEventListener('scroll', function () {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(function () { onScrollNav(); pickSection(); drawWires(); ticking = false; });
+            }, { passive: true });
+            var resizeTimer;
+            window.addEventListener('resize', function () { clearTimeout(resizeTimer); resizeTimer = setTimeout(layoutWires, 120); });
+
+            // Reveal on scroll
+            var reveals = document.querySelectorAll('.reveal');
+            if (reduced || !('IntersectionObserver' in window)) {
+                reveals.forEach(function (el) { el.classList.add('in'); });
+            } else {
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+                }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+                reveals.forEach(function (el) { io.observe(el); });
+                document.querySelectorAll('#grid .project').forEach(function (c, i) { c.style.setProperty('--d', (i % 3) * 0.08 + 's'); });
+            }
+
+            // DIP switch project filter
+            var switches = Array.prototype.slice.call(document.querySelectorAll('.switch'));
+            var cards = Array.prototype.slice.call(document.querySelectorAll('#grid .project'));
+            var status = document.getElementById('dip-status');
+            var names = { plt: 'platform', ml: 'machine learning', emb: 'embedded', spc: 'space' };
+            function applyFilter(f) {
+                var shown = 0;
+                switches.forEach(function (s) { s.setAttribute('aria-pressed', String(s.dataset.filter === f)); });
+                cards.forEach(function (c) {
+                    var on = f === 'all' || c.dataset.tags.split(' ').indexOf(f) > -1;
+                    c.hidden = !on;
+                    if (on) shown++;
+                    c.classList.add('in');
+                    c.style.setProperty('--d', '0s');
+                });
+                status.textContent = f === 'all' ? 'Showing all ' + shown + ' projects' : 'Showing ' + shown + ' ' + names[f] + ' project' + (shown === 1 ? '' : 's');
+            }
+            switches.forEach(function (s) {
+                s.addEventListener('click', function () {
+                    var f = s.getAttribute('aria-pressed') === 'true' ? 'all' : s.dataset.filter;
+                    var run = function () { applyFilter(f); };
+                    if (document.startViewTransition && !reduced) {
+                        document.startViewTransition(run).finished.then(layoutWires);
+                    } else { run(); layoutWires(); }
+                });
+            });
+
+            onScrollNav();
+            pickSection();
+            layoutWires();
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutWires);
+            window.addEventListener('load', layoutWires);
+        })();
+    </script>
 </body>
 </html>

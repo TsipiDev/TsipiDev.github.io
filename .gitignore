@@ -1,0 +1,10 @@
+# Working notes, not part of the site
+PRODUCT.md
+DESIGN.md
+
+# Editor and OS files
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store

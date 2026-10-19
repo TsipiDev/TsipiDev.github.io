@@ -1,4 +1,4 @@
-# 🌐 Dimitris Vatousis - Personal Website
+# 🌐 Dimitris Vatousis: Personal Website
 
 Welcome to my personal website! This project serves as my online portfolio, showcasing my experience, projects, research, and contact information in a sleek and modern design!
 
